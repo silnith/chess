@@ -6,10 +6,10 @@ import org.springframework.context.annotation.Bean;
 
 @Configurable
 public class SearcherConfiguration {
-
-	@Bean
-	public Chess chess() {
-		return new Chess();
-	}
-
+    
+    @Bean
+    public Chess chess() {
+        return new Chess();
+    }
+    
 }
