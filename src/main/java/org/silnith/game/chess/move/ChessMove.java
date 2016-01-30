@@ -4,6 +4,7 @@ import org.silnith.game.chess.Board;
 import org.silnith.game.chess.Color;
 import org.silnith.game.move.Move;
 
+
 public interface ChessMove extends Move<Board> {
     
     /**

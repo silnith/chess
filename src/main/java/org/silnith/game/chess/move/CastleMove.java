@@ -3,6 +3,7 @@ package org.silnith.game.chess.move;
 import org.silnith.game.chess.Board;
 import org.silnith.game.chess.Color;
 
+
 public class CastleMove implements ChessMove {
     
     public CastleMove() {

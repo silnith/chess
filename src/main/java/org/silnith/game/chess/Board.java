@@ -3,6 +3,7 @@ package org.silnith.game.chess;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Board {
     
     private final int length;
@@ -18,9 +19,9 @@ public class Board {
         }
         this.length = length;
         this.board = new ArrayList<>(this.length);
-        for (int i = 0; i < this.length; i++) {
+        for (int i = 0; i < this.length; i++ ) {
             final ArrayList<Piece> e = new ArrayList<Piece>(this.length);
-            for (int j = 0; j < this.length; j++) {
+            for (int j = 0; j < this.length; j++ ) {
                 e.add(null);
             }
             this.board.add(e);
@@ -56,10 +57,8 @@ public class Board {
     }
     
     /**
-     * @param rank
-     *            the row
-     * @param file
-     *            the column
+     * @param rank the row
+     * @param file the column
      * @return the piece on the board square
      */
     public Piece getPiece(final int rank, final int file) {
@@ -67,12 +66,9 @@ public class Board {
     }
     
     /**
-     * @param rank
-     *            the row
-     * @param file
-     *            the column
-     * @param piece
-     *            the piece to place
+     * @param rank the row
+     * @param file the column
+     * @param piece the piece to place
      */
     private void putPiece(final int rank, final int file, final Piece piece) {
         board.get(rank).set(file, piece);
@@ -81,7 +77,7 @@ public class Board {
     public Board setUpInitialBoard() {
         final Board newBoard = new Board(8);
         final Piece whitePawn = new Piece(Type.PAWN, Color.WHITE);
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 8; i++ ) {
             newBoard.putPiece(1, i, whitePawn);
         }
         final Piece whiteRook = new Piece(Type.ROOK, Color.WHITE);
@@ -98,7 +94,7 @@ public class Board {
         final Piece whiteKing = new Piece(Type.KING, Color.WHITE);
         newBoard.putPiece(0, 4, whiteKing);
         final Piece blackPawn = new Piece(Type.PAWN, Color.BLACK);
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 8; i++ ) {
             newBoard.putPiece(6, i, blackPawn);
         }
         final Piece blackRook = new Piece(Type.ROOK, Color.BLACK);
@@ -117,31 +113,28 @@ public class Board {
         return newBoard;
     }
     
-    public Board movePiece(final int sourceRank, final int sourceFile,
-            final int destinationRank, final int destinationFile) {
-        return promotePawn(sourceRank, sourceFile, destinationRank,
-                destinationFile, getPiece(sourceRank, sourceFile));
+    public Board movePiece(final int sourceRank, final int sourceFile, final int destinationRank,
+            final int destinationFile) {
+        return promotePawn(sourceRank, sourceFile, destinationRank, destinationFile, getPiece(sourceRank, sourceFile));
 //        final Board newBoard = new Board(this);
-//        
+//
 //        final List<Piece> sourceRankList = newBoard.board.get(sourceRank);
 //        final List<Piece> newSourceRankList = new ArrayList<>(sourceRankList);
 //        newSourceRankList.set(sourceFile, null);
 //        newBoard.board.set(sourceRank, newSourceRankList);
-//        
-//        final List<Piece> destinationRankList = newBoard.board
-//                .get(destinationRank);
+//
+//        final List<Piece> destinationRankList = newBoard.board.get(destinationRank);
 //        final List<Piece> newDestinationRankList = new ArrayList<>(
 //                destinationRankList);
 //        newDestinationRankList.set(destinationFile,
 //                getPiece(sourceRank, sourceFile));
 //        newBoard.board.set(destinationRank, newDestinationRankList);
-//        
+//
 //        return newBoard;
     }
     
-    public Board promotePawn(final int sourceRank, final int sourceFile,
-            final int destinationRank, final int destinationFile,
-            final Piece promotedPiece) {
+    public Board promotePawn(final int sourceRank, final int sourceFile, final int destinationRank,
+            final int destinationFile, final Piece promotedPiece) {
         final Board newBoard = new Board(this);
         
         final List<Piece> sourceRankList = newBoard.board.get(sourceRank);
@@ -149,10 +142,8 @@ public class Board {
         newSourceRankList.set(sourceFile, null);
         newBoard.board.set(sourceRank, newSourceRankList);
         
-        final List<Piece> destinationRankList = newBoard.board
-                .get(destinationRank);
-        final List<Piece> newDestinationRankList = new ArrayList<>(
-                destinationRankList);
+        final List<Piece> destinationRankList = newBoard.board.get(destinationRank);
+        final List<Piece> newDestinationRankList = new ArrayList<>(destinationRankList);
         newDestinationRankList.set(destinationFile, promotedPiece);
         newBoard.board.set(destinationRank, newDestinationRankList);
         

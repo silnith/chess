@@ -4,6 +4,7 @@ import org.silnith.game.chess.Board;
 import org.silnith.game.chess.Color;
 import org.silnith.game.chess.Piece;
 
+
 public class CaptureMove implements ChessMove {
     
     private final int sourceRank;
@@ -18,8 +19,7 @@ public class CaptureMove implements ChessMove {
     
     private final Piece capturedPiece;
     
-    public CaptureMove(final int sourceRank, final int sourceFile,
-            final int destinationRank, final int destinationFile,
+    public CaptureMove(final int sourceRank, final int sourceFile, final int destinationRank, final int destinationFile,
             final Piece capturingPiece, final Piece capturedPiece) {
         super();
         this.sourceRank = sourceRank;
@@ -32,8 +32,7 @@ public class CaptureMove implements ChessMove {
     
     @Override
     public Board apply(final Board board) {
-        return board.movePiece(sourceRank, sourceFile, destinationRank,
-                destinationFile);
+        return board.movePiece(sourceRank, sourceFile, destinationRank, destinationFile);
     }
     
     @Override

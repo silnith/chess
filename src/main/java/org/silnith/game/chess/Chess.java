@@ -12,6 +12,7 @@ import org.silnith.game.chess.move.PawnPromotionCaptureMove;
 import org.silnith.game.chess.move.PawnPromotionMove;
 import org.silnith.game.chess.move.PieceMove;
 
+
 public class Chess implements Game<ChessMove, Board> {
     
     public Chess() {
@@ -23,20 +24,19 @@ public class Chess implements Game<ChessMove, Board> {
     }
     
     @Override
-    public Collection<ChessMove> findAllMoves(
-            final GameState<ChessMove, Board> state) {
+    public Collection<ChessMove> findAllMoves(final GameState<ChessMove, Board> state) {
         final List<ChessMove> moves = new ArrayList<>();
         
         final Board board = state.getBoards().getFirst();
         final Color currentTurn = board.getCurrentTurn();
         
-        for (int rank = 0; rank < board.getLength(); rank++) {
-            for (int file = 0; file < board.getLength(); file++) {
+        for (int rank = 0; rank < board.getLength(); rank++ ) {
+            for (int file = 0; file < board.getLength(); file++ ) {
                 final Piece piece = board.getPiece(rank, file);
                 if (piece == null) {
                     continue;
                 }
-                if (!piece.getColor().equals(currentTurn)) {
+                if ( !piece.getColor().equals(currentTurn)) {
                     continue;
                 }
                 
@@ -71,58 +71,54 @@ public class Chess implements Game<ChessMove, Board> {
         return moves;
     }
     
-    private Collection<ChessMove> findHorizontalMoves(final int rank,
-            final int file, final Piece piece, final Board board) {
+    private Collection<ChessMove> findHorizontalMoves(final int rank, final int file, final Piece piece,
+            final Board board) {
         final List<ChessMove> moves = new ArrayList<>();
         
-        for (int i = rank - 1; i >= 0; i--) {
+        for (int i = rank - 1; i >= 0; i-- ) {
             final Piece destPiece = board.getPiece(i, file);
             if (destPiece == null) {
                 moves.add(new PieceMove(rank, file, i, file, piece));
             } else {
                 // destination square is not null
-                if (!piece.getColor().equals(destPiece.getColor())) {
-                    moves.add(new CaptureMove(rank, file, i, file, piece,
-                            destPiece));
+                if ( !piece.getColor().equals(destPiece.getColor())) {
+                    moves.add(new CaptureMove(rank, file, i, file, piece, destPiece));
                 }
                 break;
             }
         }
-        for (int i = rank + 1; i < board.getLength(); i++) {
+        for (int i = rank + 1; i < board.getLength(); i++ ) {
             final Piece destPiece = board.getPiece(i, file);
             if (destPiece == null) {
                 moves.add(new PieceMove(rank, file, i, file, piece));
             } else {
                 // destination square is not null
-                if (!piece.getColor().equals(destPiece.getColor())) {
-                    moves.add(new CaptureMove(rank, file, i, file, piece,
-                            destPiece));
+                if ( !piece.getColor().equals(destPiece.getColor())) {
+                    moves.add(new CaptureMove(rank, file, i, file, piece, destPiece));
                 }
                 break;
             }
         }
-        for (int i = file - 1; i >= 0; i--) {
+        for (int i = file - 1; i >= 0; i-- ) {
             final Piece destPiece = board.getPiece(rank, i);
             if (destPiece == null) {
                 moves.add(new PieceMove(rank, file, rank, i, piece));
             } else {
                 // destination square is not null
-                if (!piece.getColor().equals(destPiece.getColor())) {
-                    moves.add(new CaptureMove(rank, file, rank, i, piece,
-                            destPiece));
+                if ( !piece.getColor().equals(destPiece.getColor())) {
+                    moves.add(new CaptureMove(rank, file, rank, i, piece, destPiece));
                 }
                 break;
             }
         }
-        for (int i = file + 1; i < board.getLength(); i++) {
+        for (int i = file + 1; i < board.getLength(); i++ ) {
             final Piece destPiece = board.getPiece(rank, i);
             if (destPiece == null) {
                 moves.add(new PieceMove(rank, file, rank, i, piece));
             } else {
                 // destination square is not null
-                if (!piece.getColor().equals(destPiece.getColor())) {
-                    moves.add(new CaptureMove(rank, file, rank, i, piece,
-                            destPiece));
+                if ( !piece.getColor().equals(destPiece.getColor())) {
+                    moves.add(new CaptureMove(rank, file, rank, i, piece, destPiece));
                 }
                 break;
             }
@@ -131,59 +127,54 @@ public class Chess implements Game<ChessMove, Board> {
         return moves;
     }
     
-    private Collection<ChessMove> findDiagonalMoves(final int rank,
-            final int file, final Piece piece, final Board board) {
+    private Collection<ChessMove> findDiagonalMoves(final int rank, final int file, final Piece piece,
+            final Board board) {
         final List<ChessMove> moves = new ArrayList<>();
         
-        for (int i = rank - 1, j = file - 1; i >= 0 && j >= 0; i--, j--) {
+        for (int i = rank - 1, j = file - 1; i >= 0 && j >= 0; i-- , j-- ) {
             final Piece destPiece = board.getPiece(i, j);
             if (destPiece == null) {
                 moves.add(new PieceMove(rank, file, i, j, destPiece));
             } else {
                 // destination square is not null
-                if (!piece.getColor().equals(destPiece.getColor())) {
-                    moves.add(new CaptureMove(rank, file, i, j, piece,
-                            destPiece));
+                if ( !piece.getColor().equals(destPiece.getColor())) {
+                    moves.add(new CaptureMove(rank, file, i, j, piece, destPiece));
                 }
                 break;
             }
         }
-        for (int i = rank + 1, j = file - 1; i < board.getLength() && j >= 0; i++, j--) {
+        for (int i = rank + 1, j = file - 1; i < board.getLength() && j >= 0; i++ , j-- ) {
             final Piece destPiece = board.getPiece(i, j);
             if (destPiece == null) {
                 moves.add(new PieceMove(rank, file, i, j, destPiece));
             } else {
                 // destination square is not null
-                if (!piece.getColor().equals(destPiece.getColor())) {
-                    moves.add(new CaptureMove(rank, file, i, j, piece,
-                            destPiece));
+                if ( !piece.getColor().equals(destPiece.getColor())) {
+                    moves.add(new CaptureMove(rank, file, i, j, piece, destPiece));
                 }
                 break;
             }
         }
-        for (int i = rank - 1, j = file + 1; i >= 0 && j < board.getLength(); i--, j++) {
+        for (int i = rank - 1, j = file + 1; i >= 0 && j < board.getLength(); i-- , j++ ) {
             final Piece destPiece = board.getPiece(i, j);
             if (destPiece == null) {
                 moves.add(new PieceMove(rank, file, i, j, destPiece));
             } else {
                 // destination square is not null
-                if (!piece.getColor().equals(destPiece.getColor())) {
-                    moves.add(new CaptureMove(rank, file, i, j, piece,
-                            destPiece));
+                if ( !piece.getColor().equals(destPiece.getColor())) {
+                    moves.add(new CaptureMove(rank, file, i, j, piece, destPiece));
                 }
                 break;
             }
         }
-        for (int i = rank + 1, j = file + 1; i < board.getLength()
-                && j < board.getLength(); i++, j++) {
+        for (int i = rank + 1, j = file + 1; i < board.getLength() && j < board.getLength(); i++ , j++ ) {
             final Piece destPiece = board.getPiece(i, j);
             if (destPiece == null) {
                 moves.add(new PieceMove(rank, file, i, j, destPiece));
             } else {
                 // destination square is not null
-                if (!piece.getColor().equals(destPiece.getColor())) {
-                    moves.add(new CaptureMove(rank, file, i, j, piece,
-                            destPiece));
+                if ( !piece.getColor().equals(destPiece.getColor())) {
+                    moves.add(new CaptureMove(rank, file, i, j, piece, destPiece));
                 }
                 break;
             }
@@ -192,8 +183,7 @@ public class Chess implements Game<ChessMove, Board> {
         return moves;
     }
     
-    private Collection<ChessMove> findPawnMoves(final int rank, final int file,
-            final Piece piece, final Board board) {
+    private Collection<ChessMove> findPawnMoves(final int rank, final int file, final Piece piece, final Board board) {
         final List<ChessMove> moves = new ArrayList<>();
         
         final Color color = piece.getColor();
@@ -223,14 +213,10 @@ public class Chess implements Game<ChessMove, Board> {
             // pawn promotion
             if (board.getPiece(newRank, file) == null) {
                 // move straight forward to promotion
-                moves.add(new PawnPromotionMove(rank, file, newRank, piece,
-                        Type.ROOK));
-                moves.add(new PawnPromotionMove(rank, file, newRank, piece,
-                        Type.KNIGHT));
-                moves.add(new PawnPromotionMove(rank, file, newRank, piece,
-                        Type.BISHOP));
-                moves.add(new PawnPromotionMove(rank, file, newRank, piece,
-                        Type.QUEEN));
+                moves.add(new PawnPromotionMove(rank, file, newRank, piece, Type.ROOK));
+                moves.add(new PawnPromotionMove(rank, file, newRank, piece, Type.KNIGHT));
+                moves.add(new PawnPromotionMove(rank, file, newRank, piece, Type.BISHOP));
+                moves.add(new PawnPromotionMove(rank, file, newRank, piece, Type.QUEEN));
             }
             
             final int leftFile = file - 1;
@@ -238,16 +224,14 @@ public class Chess implements Game<ChessMove, Board> {
                 final Piece destPiece = board.getPiece(newRank, leftFile);
                 if (destPiece != null) {
                     if (destPiece.getColor() != color) {
-                        moves.add(new PawnPromotionCaptureMove(rank, file,
-                                newRank, leftFile, piece, destPiece, Type.ROOK));
-                        moves.add(new PawnPromotionCaptureMove(rank, file,
-                                newRank, leftFile, piece, destPiece,
+                        moves.add(new PawnPromotionCaptureMove(rank, file, newRank, leftFile, piece, destPiece,
+                                Type.ROOK));
+                        moves.add(new PawnPromotionCaptureMove(rank, file, newRank, leftFile, piece, destPiece,
                                 Type.KNIGHT));
-                        moves.add(new PawnPromotionCaptureMove(rank, file,
-                                newRank, leftFile, piece, destPiece,
+                        moves.add(new PawnPromotionCaptureMove(rank, file, newRank, leftFile, piece, destPiece,
                                 Type.BISHOP));
-                        moves.add(new PawnPromotionCaptureMove(rank, file,
-                                newRank, leftFile, piece, destPiece, Type.QUEEN));
+                        moves.add(new PawnPromotionCaptureMove(rank, file, newRank, leftFile, piece, destPiece,
+                                Type.QUEEN));
                     }
                 }
             }
@@ -256,16 +240,13 @@ public class Chess implements Game<ChessMove, Board> {
                 final Piece destPiece = board.getPiece(newRank, rightFile);
                 if (destPiece != null) {
                     if (destPiece.getColor() != color) {
-                        moves.add(new PawnPromotionCaptureMove(rank, file,
-                                newRank, rightFile, piece, destPiece, Type.ROOK));
-                        moves.add(new PawnPromotionCaptureMove(rank, file,
-                                newRank, rightFile, piece, destPiece,
+                        moves.add(new PawnPromotionCaptureMove(rank, file, newRank, rightFile, piece, destPiece,
+                                Type.ROOK));
+                        moves.add(new PawnPromotionCaptureMove(rank, file, newRank, rightFile, piece, destPiece,
                                 Type.KNIGHT));
-                        moves.add(new PawnPromotionCaptureMove(rank, file,
-                                newRank, rightFile, piece, destPiece,
+                        moves.add(new PawnPromotionCaptureMove(rank, file, newRank, rightFile, piece, destPiece,
                                 Type.BISHOP));
-                        moves.add(new PawnPromotionCaptureMove(rank, file,
-                                newRank, rightFile, piece, destPiece,
+                        moves.add(new PawnPromotionCaptureMove(rank, file, newRank, rightFile, piece, destPiece,
                                 Type.QUEEN));
                     }
                 }
@@ -276,8 +257,7 @@ public class Chess implements Game<ChessMove, Board> {
                 if (rank == startingRank) {
                     final int jumpRank = newRank + increment;
                     if (board.getPiece(jumpRank, file) == null) {
-                        moves.add(new PieceMove(rank, file, jumpRank, file,
-                                piece));
+                        moves.add(new PieceMove(rank, file, jumpRank, file, piece));
                     }
                 }
             }
@@ -287,8 +267,7 @@ public class Chess implements Game<ChessMove, Board> {
                 final Piece destPiece = board.getPiece(newRank, leftFile);
                 if (destPiece != null) {
                     if (destPiece.getColor() != color) {
-                        moves.add(new CaptureMove(rank, file, newRank,
-                                leftFile, piece, destPiece));
+                        moves.add(new CaptureMove(rank, file, newRank, leftFile, piece, destPiece));
                     }
                 }
             }
@@ -297,8 +276,7 @@ public class Chess implements Game<ChessMove, Board> {
                 final Piece destPiece = board.getPiece(newRank, rightFile);
                 if (destPiece != null) {
                     if (destPiece.getColor() != color) {
-                        moves.add(new CaptureMove(rank, file, newRank,
-                                rightFile, piece, destPiece));
+                        moves.add(new CaptureMove(rank, file, newRank, rightFile, piece, destPiece));
                     }
                 }
             }
@@ -310,8 +288,7 @@ public class Chess implements Game<ChessMove, Board> {
     }
     
     @Override
-    public GameState<ChessMove, Board> pruneGameState(
-            final GameState<ChessMove, Board> state) {
+    public GameState<ChessMove, Board> pruneGameState(final GameState<ChessMove, Board> state) {
         // if en passant, check that the pawn jump was the previous move
         
         if (state.getMoves().size() < 20) {
